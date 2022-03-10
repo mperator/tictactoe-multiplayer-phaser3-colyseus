@@ -1,9 +1,9 @@
 import { Schema, ArraySchema, type } from '@colyseus/schema'
-import ITicTacToeState, { GameState } from '../types/ITicTacToeState';
+import ITicTacToeState, { GameStates } from '../types/ITicTacToeState';
 
 export default class TicTacToeState extends Schema implements ITicTacToeState {
     @type('number')
-    gameState: number = GameState.WaitingForPlayers;
+    gameState: number = GameStates.WaitingForPlayers;
     
     @type(['number'])
     board: ArraySchema<number>;

@@ -1,9 +1,9 @@
 import { Command } from "@colyseus/command";
-import ITicTacToeState, { Cell } from "../../types/ITicTacToeState";
+import ITicTacToeState, { CellValues } from "../../types/ITicTacToeState";
 import NextTurnCommand from "./NextTurnCommand";
 
 export default class CheckWinnerCommand extends Command<ITicTacToeState> {
-    private determineWin(cellValue: Cell) {
+    private determineWin(cellValue: CellValues) {
         const board = this.state.board;
 
         if ((board[0] === cellValue && board[1] === cellValue && board[2] === cellValue) ||
@@ -20,9 +20,8 @@ export default class CheckWinnerCommand extends Command<ITicTacToeState> {
     }
 
     execute() {
-        
-        const winnerO = this.determineWin(Cell.O);
-        const winnerX = this.determineWin(Cell.X);
+        const winnerO = this.determineWin(CellValues.O);
+        const winnerX = this.determineWin(CellValues.X);
 
         if (winnerO || winnerX) {
             this.state.winningPlayer = this.state.activePlayer;

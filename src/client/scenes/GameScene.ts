@@ -1,11 +1,11 @@
 import Phaser from 'phaser'
-import { IGameOverSceneData, IGameSceneData } from '../../types/Scenes';
-import ITicTacToeState, { Cell, GameState } from '../../types/ITicTacToeState';
-import type Server from '../services/Server';
+import { IGameOverSceneData, IGameSceneData } from './SceneData';
+import ITicTacToeState, { CellValues, GameStates } from '../../types/ITicTacToeState';
+import type TicTacToeClient from '../services/TicTacToeClient';
 
-export default class Game extends Phaser.Scene {
-    private server?: Server;
-    private cells: { display: Phaser.GameObjects.Rectangle, value: Cell }[] = [];
+export default class GameScene extends Phaser.Scene {
+    private server?: TicTacToeClient;
+    private cells: { display: Phaser.GameObjects.Rectangle, value: CellValues }[] = [];
     private onGameOver?: (data: IGameOverSceneData) => void
 
     private gameStateText?: Phaser.GameObjects.Text;
@@ -44,12 +44,12 @@ export default class Game extends Phaser.Scene {
                 });
 
             switch (cellState) {
-                case Cell.X:
+                case CellValues.X:
                     this.add
                         .star(cell.x, cell.y, 4, 4, 60, 0xff0000)
                         .setAngle(45);
                     break;
-                case Cell.O:
+                case CellValues.O:
                     this.add
                         .circle(cell.x, cell.y, 50, 0x0000ff);
                     break;
@@ -64,7 +64,7 @@ export default class Game extends Phaser.Scene {
             }
         });
 
-        if(this.server?.gameState === GameState.WaitingForPlayers) {
+        if(this.server?.gameState === GameStates.WaitingForPlayers) {
             const width  = this.scale.width;
             this.gameStateText = this.add.text(width * 0.5, 50, 'Waiting for opponents...')
                 .setOrigin(0.5);
@@ -76,16 +76,16 @@ export default class Game extends Phaser.Scene {
         this.server?.onGameStateChanged(this.handleGameStateChanged, this);
     }
 
-    private handleBoardChanged(newValue: Cell, index: number) {
+    private handleBoardChanged(newValue: CellValues, index: number) {
         const cell = this.cells[index];
         if (cell.value !== newValue) {
             switch (newValue) {
-                case Cell.X:
+                case CellValues.X:
                     this.add
                         .star(cell.display.x, cell.display.y, 4, 4, 60, 0xff0000)
                         .setAngle(45);
                     break;
-                case Cell.O:
+                case CellValues.O:
                     this.add
                         .circle(cell.display.x, cell.display.y, 50, 0x0000ff);
                     break;
@@ -108,8 +108,8 @@ export default class Game extends Phaser.Scene {
         });
     }
 
-    private handleGameStateChanged(state: GameState) {
-        if(state === GameState.Playing && this.gameStateText) {
+    private handleGameStateChanged(state: GameStates) {
+        if(state === GameStates.Playing && this.gameStateText) {
             this.gameStateText.destroy();
             this.gameStateText = undefined;
         }

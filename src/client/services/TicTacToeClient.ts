@@ -1,9 +1,10 @@
 import { Client, Room } from 'colyseus.js'
 import Phaser from 'phaser';
-import ITicTacToeState, { Cell, GameState } from '../../types/ITicTacToeState';
+import ITicTacToeState, { CellValues, GameStates } from '../../types/ITicTacToeState';
 import { Messages } from '../../types/Messages';
 
-export default class Server {
+// Network client
+export default class TicTacToeClient {
 
     private client: Client;
     private events: Phaser.Events.EventEmitter;
@@ -17,7 +18,7 @@ export default class Server {
 
     get gameState() {
         if (!this.room) {
-            return GameState.WaitingForPlayers;
+            return GameStates.WaitingForPlayers;
         }
 
         return this.room?.state.gameState;
@@ -81,7 +82,7 @@ export default class Server {
             return;
         }
 
-        if(this.room.state.gameState !== GameState.Playing) {
+        if(this.room.state.gameState !== GameStates.Playing) {
             return;
         }
 
@@ -97,7 +98,7 @@ export default class Server {
         this.events.once('once-state-changed', callback, context);
     }
 
-    onBoardChanged(callback: (cell: Cell, index: number) => void, context?: any) {
+    onBoardChanged(callback: (cell: CellValues, index: number) => void, context?: any) {
         this.events.on('board-changed', callback, context);
     }
 
@@ -109,7 +110,7 @@ export default class Server {
         this.events.on('player-won', callback, context);
     }
 
-    onGameStateChanged(callback: (gameState: GameState) => void, context?: any) {
+    onGameStateChanged(callback: (gameState: GameStates) => void, context?: any) {
         this.events.on('game-state-changed', callback, context);
     }
 }

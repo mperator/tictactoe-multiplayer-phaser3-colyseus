@@ -1,7 +1,7 @@
 import Phaser from 'phaser'
-import { IGameOverSceneData } from '../../types/Scenes';
+import { IGameOverSceneData } from './SceneData';
 
-export default class GameOver extends Phaser.Scene {
+export default class GameOverScene extends Phaser.Scene {
     constructor() {
         super('game-over');
     }

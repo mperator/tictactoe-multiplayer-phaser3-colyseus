@@ -1,4 +1,4 @@
-import Server from "../client/services/Server"
+import TicTacToeClient from "../services/TicTacToeClient"
 
 export interface IGameOverSceneData {
     winner: boolean
@@ -6,6 +6,6 @@ export interface IGameOverSceneData {
 }
 
 export interface IGameSceneData {
-    server: Server,
+    server: TicTacToeClient,
     onGameOver: (data: IGameOverSceneData) => void
 }

@@ -2,12 +2,12 @@ import { Room, Client } from 'colyseus'
 import { Dispatcher } from '@colyseus/command';
 import { Messages } from '../types/Messages';
 import TicTacToeState from './TicTacToeState';
-import PlayerSelectionCommand from './commands/PlayerSelectionCommands';
-import { GameState } from '../types/ITicTacToeState';
+import PlayerSelectionCommand from './commands/PlayerSelectionCommand';
+import { GameStates } from '../types/ITicTacToeState';
 
 // SERVER
 
-export default class TicTacToe extends Room<TicTacToeState> {
+export default class TicTacToeRoom extends Room<TicTacToeState> {
     private dispatcher = new Dispatcher(this);
     
     onCreate() {
@@ -28,7 +28,7 @@ export default class TicTacToe extends Room<TicTacToeState> {
         client.send(Messages.PlayerIndex, { playerIndex: index});
 
         if(this.clients.length >= this.maxClients) {
-            this.state.gameState = GameState.Playing;
+            this.state.gameState = GameStates.Playing;
         }
     }
 }

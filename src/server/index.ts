@@ -3,7 +3,7 @@ import express from 'express'
 import cors from 'cors'
 import { Server } from 'colyseus'
 import { monitor } from '@colyseus/monitor'
-import TicTacToe from './TicTacToe'
+import TicTacToeRoom from './TicTacToeRoom'
 
 const port = Number(process.env.PORT || 2567)
 const app = express()
@@ -17,7 +17,7 @@ const gameServer = new Server({
 })
 
 // register your room handlers
-gameServer.define('tic-tac-toe', TicTacToe)
+gameServer.define('tic-tac-toe', TicTacToeRoom)
 
 // register colyseus monitor AFTER registering your room handlers
 app.use('/colyseus', monitor())

@@ -1,16 +1,16 @@
-import Server from '../services/Server';
+import TicTacToeClient from '../services/TicTacToeClient';
 import Phaser from 'phaser'
-import { IGameOverSceneData } from '../../types/Scenes';
+import { IGameOverSceneData } from './SceneData';
 
-export default class Bootstrap extends Phaser.Scene {
-    private server!: Server;
+export default class BootstrapScene extends Phaser.Scene {
+    private server!: TicTacToeClient;
 
     constructor() {
         super('bootstrap');
     }
 
     init() {
-        this.server = new Server();
+        this.server = new TicTacToeClient();
     }
 
     create() {
