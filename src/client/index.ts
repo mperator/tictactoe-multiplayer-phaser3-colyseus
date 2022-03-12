@@ -1,4 +1,4 @@
-import 'regenerator-runtime/runtime'
+// import 'regenerator-runtime/runtime'
 import Phaser from 'phaser'
 
 import BootstrapScene from './scenes/BootstrapScene'

@@ -15,7 +15,6 @@ export default class TicTacToeRoom extends Room<TicTacToeState> {
         this.setState(new TicTacToeState());
 
         this.onMessage(Messages.PlayerSelection, (client, message: { index: number}) => {
-            console.log('dispatch')
             this.dispatcher.dispatch(new PlayerSelectionCommand(), {
                 client,
                 index: message.index
