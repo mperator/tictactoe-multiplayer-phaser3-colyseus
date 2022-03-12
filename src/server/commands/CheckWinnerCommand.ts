@@ -1,8 +1,9 @@
 import { Command } from "@colyseus/command";
-import ITicTacToeState, { CellValues } from "../../types/ITicTacToeState";
+import { CellValues } from "../../types/ITicTacToeState";
+import TicTacToeRoom from "../TicTacToeRoom";
 import NextTurnCommand from "./NextTurnCommand";
 
-export default class CheckWinnerCommand extends Command<ITicTacToeState> {
+export default class CheckWinnerCommand extends Command<TicTacToeRoom> {
     private determineWin(cellValue: CellValues) {
         const board = this.state.board;
 

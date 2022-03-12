@@ -1,6 +1,6 @@
 {
     "name": "tictactoe-multiplayer-phaser3-colyseus",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "scripts": {
         "dev": "vite",
         "build": "vite build",
@@ -23,10 +23,10 @@
     },
     "homepage": "https://github.com/mperator/tictactoe-multiplayer-phaser3-colyseus",
     "dependencies": {
-        "@colyseus/command": "^0.1.6",
-        "@colyseus/monitor": "^0.12.2",
-        "colyseus": "^0.14.7",
-        "colyseus.js": "^0.14.1",
+        "@colyseus/command": "^0.2.1",
+        "@colyseus/monitor": "^0.14.22",
+        "colyseus": "^0.14.23",
+        "colyseus.js": "^0.14.13",
         "cors": "^2.8.5",
         "express": "^4.16.4",
         "phaser": "^3.50.1",

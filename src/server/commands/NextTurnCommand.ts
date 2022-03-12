@@ -1,7 +1,7 @@
 import { Command } from "@colyseus/command";
-import ITicTacToeState from "../../types/ITicTacToeState";
+import TicTacToeRoom from "../TicTacToeRoom";
 
-export default class NextTurnCommand extends Command<ITicTacToeState> {
+export default class NextTurnCommand extends Command<TicTacToeRoom> {
     execute() {
         const activePlayer = this.room.state.activePlayer;
         if(activePlayer === 0) {
